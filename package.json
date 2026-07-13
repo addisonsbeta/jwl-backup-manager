@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "postinstall": "cp node_modules/sql.js/dist/sql-wasm.wasm node_modules/sql.js/dist/sql-wasm-browser.wasm public/"
   },
   "keywords": [],
   "author": "",
