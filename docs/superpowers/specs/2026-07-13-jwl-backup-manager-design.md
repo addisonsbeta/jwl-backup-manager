@@ -59,13 +59,17 @@ and restores are always manual in-app and *replace* device data.)
    `.jwlplaylist` sources are optional per-file: user chooses which to fold into
    the merged backup.
 3. **Explore** — visual dashboard of all loaded data (see UI section).
-4. **Merge** — deduplicate by **content identity**, not row IDs:
-   - highlight (UserMark/BlockRange): publication/location + block ranges + color
-   - note: location + title + content lineage
-   - playlist: name + item set; playlist item: media/location + markers
-   - tag: normalized name; bookmark: location + slot
-   Items present in only one source are included automatically. Identical items
-   collapse to one.
+4. **Merge** — two-tier identity matching (verified against real 2017 + 2026 dbs:
+   Note.Guid and UserMark.UserMarkGuid exist in every schema version we hold):
+   - **Tier 1 — GUID:** same GUID in two sources = same item. Identical content →
+     dedupe silently; different content → conflict for the user.
+   - **Tier 2 — content identity** for GUID-less rows and cross-device duplicates
+     with different GUIDs:
+     - highlight: location + block ranges + color
+     - note: location + title + content
+     - playlist: name + item set; playlist item: media/location + markers
+     - tag: normalized name; bookmark: location + slot
+   Items present in only one source are included automatically.
 5. **Resolve** — same-item-different-content pairs become conflicts the user
    resolves (see Conflict UX). Bulk rules: "newest wins", "device X wins",
    "always keep both" — applied to remaining conflicts of a type, with a review
