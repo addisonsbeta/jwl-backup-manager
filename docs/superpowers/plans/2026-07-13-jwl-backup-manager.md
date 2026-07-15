@@ -73,7 +73,7 @@ Conventions: all engine functions are pure/async-pure; ids inside the model are 
 - [ ] **Step 1: Scaffold**
 
 ```bash
-cd /Users/addisonsawyer/00_CLAUDECODE/JWL_Backup_Manager
+cd <project-root>
 npm create vite@latest . -- --template svelte-ts   # answer "Ignore files and continue" if prompted
 npm i
 npm i fflate sql.js
